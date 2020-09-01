@@ -25,7 +25,7 @@ app.use(
 
         if (pathname === "/list") {
             const files = await readDir();
-            console.log("files", files);
+            console.log("files2", files);
 
             responseTemplate.success.data = files;
             response.body = responseTemplate.success;
