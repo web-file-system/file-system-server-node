@@ -1,22 +1,75 @@
 const FS = require("fs/promises");
+const {
+    SuccessCode,
+    SuccessMessage,
+    FailCode,
+    FailMessage,
+} = require("./ResponseUtil").default;
 
 async function deleteFile(path) {
-    const error = await FS.unlink(path);
-    console.log("deleteFile:", error);
-    if (error) {
-        return error;
-    } else {
-        return true;
-    }
+    return new Promise((resolve, reject) => {
+        FS.access(path)
+            .then(() => {
+                // 可访问
+
+                FS.unlink(path)
+                    .then(() => {
+                        const res = {
+                            code: SuccessCode,
+                            message: SuccessMessage,
+                        };
+                        resolve(res);
+                    })
+                    .catch(() => {
+                        const error = {
+                            code: FailCode,
+                            message: FailMessage,
+                        };
+                        reject(error);
+                    });
+            })
+            .catch(() => {
+                // 不可访问
+
+                const error = {
+                    code: FailCode,
+                    message: FailMessage,
+                };
+
+                reject(error);
+            });
+    });
 }
 
 async function deleteDir(path) {
-    const error = await FS.rmdir(path);
-    console.log("deleteDir:", error);
-    if (error) {
-        return error;
-    } else {
-        return true;
-    }
+    return new Promise((resolve, reject) => {
+        FS.access(path)
+            .then(() => {
+                // 可访问
+                FS.rmdir(path)
+                    .then(() => {
+                        const res = {
+                            code: SuccessCode,
+                            message: SuccessMessage,
+                        };
+                        resolve(res);
+                    })
+                    .catch(() => {
+                        const error = {
+                            code: FailCode,
+                            message: FailMessage,
+                        };
+                        reject(error);
+                    });
+            })
+            .catch(() => {
+                // 不可访问
+                const error = {
+                    code: FailCode,
+                    message: FailMessage,
+                };
+                reject(error);
+            });
+    });
 }
 exports.default = { deleteFile, deleteDir };

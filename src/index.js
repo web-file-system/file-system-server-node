@@ -60,21 +60,27 @@ app.use(
                 responseTemplate.fail.message = "缺少 path 参数";
                 response.body = responseTemplate.fail;
             } else {
-                let error;
+                let result;
                 if (type === "file") {
                     //file
-                    error = await deleteUtil.deleteFile(path);
+                    return deleteUtil
+                        .deleteFile(path)
+                        .then((result) => {
+                            response.body = result;
+                        })
+                        .catch((error) => {
+                            response.body = error;
+                        });
                 } else {
                     //dir
-                    error = await deleteUtil.deleteDir(path);
-                }
-
-                if (error !== true) {
-                    responseTemplate.fail.data = error;
-                    response.body = responseTemplate.fail;
-                } else {
-                    responseTemplate.success.data = null;
-                    response.body = responseTemplate.success;
+                    return deleteUtil
+                        .deleteDir(path)
+                        .then((result) => {
+                            response.body = result;
+                        })
+                        .catch((error) => {
+                            response.body = error;
+                        });
                 }
             }
         }
