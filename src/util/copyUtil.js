@@ -5,6 +5,7 @@ const {
     FailCode,
     FailMessage,
 } = require("./ResponseUtil").default;
+const { zip } = require("./gzipUtil").default;
 
 function copyFile(input) {
     return new Promise((resolve, reject) => {
@@ -47,7 +48,38 @@ function copyFile(input) {
     });
 }
 
-function copyDir() {}
+function copyDir(input) {
+    return new Promise((resolve, reject) => {
+        FS.access(input)
+            .then(() => {
+                // 可访问
+                let output = `${input}的备份.zip`;
+                zip(input, output)
+                    .then(() => {
+                        const res = {
+                            code: SuccessCode,
+                            message: SuccessMessage,
+                        };
+                        resolve(res);
+                    })
+                    .catch(() => {
+                        const error = {
+                            code: FailCode,
+                            message: FailMessage,
+                        };
+                        reject(error);
+                    });
+            })
+            .catch(() => {
+                // 不可访问
+                const error = {
+                    code: FailCode,
+                    message: FailMessage,
+                };
+                reject(error);
+            });
+    });
+}
 exports.default = {
     copyFile,
     copyDir,

@@ -92,7 +92,7 @@ app.use(
                 responseTemplate.fail.message = "缺少 path 参数";
                 response.body = responseTemplate.fail;
             } else {
-                return zip(path, `${path}.zip`)
+                return zip(path)
                     .then((result) => {
                         response.body = result;
                     })
