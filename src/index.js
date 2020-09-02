@@ -9,6 +9,7 @@ const app = new Koa();
 const cors = require("@koa/cors");
 const readDir = require("./util/readUtil").default;
 const deleteUtil = require("./util/deleteUtil").default;
+const { zip } = require("./util/gzipUtil").default;
 
 app.use(bodyParser());
 
@@ -30,7 +31,7 @@ app.use(
         const pathname = url.pathname;
 
         const queryObj = request.body;
-        console.log("queryObj:", queryObj);
+        // console.log("queryObj:", queryObj);
 
         if (pathname === "/list") {
             const { path } = queryObj;
@@ -40,7 +41,6 @@ app.use(
             } else {
                 const files = await readDir.readDirAndFile(path);
                 // console.log("files2", files);
-
                 responseTemplate.success.data = files;
                 response.body = responseTemplate.success;
             }
@@ -60,7 +60,6 @@ app.use(
                 responseTemplate.fail.message = "缺少 path 参数";
                 response.body = responseTemplate.fail;
             } else {
-                let result;
                 if (type === "file") {
                     //file
                     return deleteUtil
@@ -82,6 +81,22 @@ app.use(
                             response.body = error;
                         });
                 }
+            }
+        } else if (pathname === "/zip") {
+            console.log("queryObj:", queryObj);
+
+            const { path } = queryObj;
+            if (path === undefined) {
+                responseTemplate.fail.message = "缺少 path 参数";
+                response.body = responseTemplate.fail;
+            } else {
+                return zip(path, `${path}.zip`)
+                    .then((result) => {
+                        response.body = result;
+                    })
+                    .catch((error) => {
+                        response.body = error;
+                    });
             }
         }
     })
