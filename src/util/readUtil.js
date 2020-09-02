@@ -33,7 +33,7 @@ async function readDirAndFile(path) {
         path = "/";
     }
     const files = await fs.promises.readdir(path, { withFileTypes: true });
-    console.log("files:", files);
+    // console.log("files:", files);
     const infos = [];
     for (const dirent of files) {
         if (dirent.isFile() || dirent.isDirectory()) {
@@ -50,7 +50,7 @@ async function readDir(path) {
         path = "/";
     }
     const files = await fs.promises.readdir(path, { withFileTypes: true });
-    console.log("files:", files);
+    // console.log("files:", files);
     const infos = [];
     for (const dirent of files) {
         if (dirent.isDirectory()) {
