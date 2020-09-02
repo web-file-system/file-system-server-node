@@ -1,8 +1,3 @@
-const { createGzip, createGunzip } = require("zlib");
-const { pipeline } = require("stream");
-const { createReadStream, createWriteStream } = require("fs");
-const { promisify } = require("util");
-const pipe = promisify(pipeline);
 const FS = require("fs/promises");
 const {
     SuccessCode,
@@ -10,30 +5,51 @@ const {
     FailCode,
     FailMessage,
 } = require("./ResponseUtil").default;
+const Compressing = require("compressing");
 
-function zip(input, output) {
+function zip(input, output, isFile) {
     return new Promise((resolve, reject) => {
         FS.access(input)
             .then(() => {
                 // 可访问
-                const gzip = createGzip();
-                const source = createReadStream(input);
-                const destination = createWriteStream(output);
-                pipe(source, gzip, destination)
-                    .then(() => {
-                        const res = {
-                            code: SuccessCode,
-                            message: SuccessMessage,
-                        };
-                        resolve(res);
-                    })
-                    .catch(() => {
-                        const error = {
-                            code: FailCode,
-                            message: FailMessage,
-                        };
-                        reject(error);
-                    });
+                if (output === null || output === undefined) {
+                    output = `${input}.zip`;
+                }
+                if (isFile === true) {
+                    Compressing.zip
+                        .compressFile(input, output)
+                        .then(() => {
+                            const res = {
+                                code: SuccessCode,
+                                message: SuccessMessage,
+                            };
+                            resolve(res);
+                        })
+                        .catch(() => {
+                            const error = {
+                                code: FailCode,
+                                message: FailMessage,
+                            };
+                            reject(error);
+                        });
+                } else {
+                    Compressing.zip
+                        .compressDir(input, output)
+                        .then(() => {
+                            const res = {
+                                code: SuccessCode,
+                                message: SuccessMessage,
+                            };
+                            resolve(res);
+                        })
+                        .catch(() => {
+                            const error = {
+                                code: FailCode,
+                                message: FailMessage,
+                            };
+                            reject(error);
+                        });
+                }
             })
             .catch(() => {
                 // 不可访问
@@ -51,10 +67,8 @@ function unzip(input, output) {
         FS.access(input)
             .then(() => {
                 // 可访问
-                const gunzip = createGunzip();
-                const source = createReadStream(input);
-                const destination = createWriteStream(output);
-                pipe(source, gunzip, destination)
+                Compressing.zip
+                    .uncompress(input, output)
                     .then(() => {
                         const res = {
                             code: SuccessCode,
@@ -62,7 +76,7 @@ function unzip(input, output) {
                         };
                         resolve(res);
                     })
-                    .catch(() => {
+                    .catch((err) => {
                         const error = {
                             code: FailCode,
                             message: FailMessage,
