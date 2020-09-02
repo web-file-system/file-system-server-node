@@ -64,4 +64,5 @@ async function readDir(path) {
 
 exports.default = {
     readDirAndFile,
+    readDir,
 };
