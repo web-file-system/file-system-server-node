@@ -20,7 +20,7 @@ async function readFileInfo(path, dirent) {
     // console.log("info:", info);
 
     const stat = await fs.promises.stat(info.path);
-    console.log("stats:", stat);
+    // console.log("stats:", stat);
 
     info.createTime = stat.birthtime;
     info.updateTime = stat.mtime;

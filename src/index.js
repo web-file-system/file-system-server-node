@@ -7,6 +7,8 @@ const cors = require("@koa/cors");
 const readDir = require("./util/readUtil").default;
 const deleteUtil = require("./util/deleteUtil").default;
 const { zip, unzip } = require("./util/gzipUtil").default;
+const { copyFile, copyDir } = require("./util/copyUtil").default;
+
 var _ = require("lodash");
 
 const app = new Koa();
@@ -113,6 +115,32 @@ app.use(
                     .catch((error) => {
                         response.body = error;
                     });
+            }
+        } else if (pathname === "/copy") {
+            const { path, type } = queryObj;
+            if (path === undefined) {
+                responseTemplate.fail.message = "缺少 path 参数";
+                response.body = responseTemplate.fail;
+            } else {
+                if (type === "file") {
+                    //file
+                    return copyFile(path)
+                        .then((result) => {
+                            response.body = result;
+                        })
+                        .catch((error) => {
+                            response.body = error;
+                        });
+                } else {
+                    //dir
+                    return copyDir(path)
+                        .then((result) => {
+                            response.body = result;
+                        })
+                        .catch((error) => {
+                            response.body = error;
+                        });
+                }
             }
         }
     })
