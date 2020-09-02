@@ -16,10 +16,11 @@ async function readFileInfo(path, dirent) {
     info.isDir = dirent.isDirectory();
     info.name = dirent.name;
     info.path = Path.posix.join(path, dirent.name);
+    info.isZip = Path.posix.extname(info.path) === ".zip" ? true : false;
     // console.log("info:", info);
 
     const stat = await fs.promises.stat(info.path);
-    // console.log("stats:", stat);
+    console.log("stats:", stat);
 
     info.createTime = stat.birthtime;
     info.updateTime = stat.mtime;

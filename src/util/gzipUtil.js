@@ -1,4 +1,4 @@
-const { createGzip } = require("zlib");
+const { createGzip, createGunzip } = require("zlib");
 const { pipeline } = require("stream");
 const { createReadStream, createWriteStream } = require("fs");
 const { promisify } = require("util");
@@ -46,6 +46,41 @@ function zip(input, output) {
     });
 }
 
+function unzip(input, output) {
+    return new Promise((resolve, reject) => {
+        FS.access(input)
+            .then(() => {
+                // 可访问
+                const gunzip = createGunzip();
+                const source = createReadStream(input);
+                const destination = createWriteStream(output);
+                pipe(source, gunzip, destination)
+                    .then(() => {
+                        const res = {
+                            code: SuccessCode,
+                            message: SuccessMessage,
+                        };
+                        resolve(res);
+                    })
+                    .catch(() => {
+                        const error = {
+                            code: FailCode,
+                            message: FailMessage,
+                        };
+                        reject(error);
+                    });
+            })
+            .catch(() => {
+                // 不可访问
+                const error = {
+                    code: FailCode,
+                    message: FailMessage,
+                };
+                reject(error);
+            });
+    });
+}
 exports.default = {
     zip,
+    unzip: unzip,
 };

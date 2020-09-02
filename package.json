@@ -12,7 +12,8 @@
         "@koa/cors": "^3.1.0",
         "koa": "^2.13.0",
         "koa-bodyparser": "^4.3.0",
-        "koa-mount": "^4.0.0"
+        "koa-mount": "^4.0.0",
+        "lodash": "^4.17.20"
     },
     "devDependencies": {
         "nodemon": "^2.0.4"

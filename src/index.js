@@ -3,13 +3,13 @@ const mount = require("koa-mount");
 const URL = require("url");
 const responseTemplate = require("./util/responseTemplate");
 const bodyParser = require("koa-bodyparser");
-
-const app = new Koa();
-
 const cors = require("@koa/cors");
 const readDir = require("./util/readUtil").default;
 const deleteUtil = require("./util/deleteUtil").default;
-const { zip } = require("./util/gzipUtil").default;
+const { zip, unzip } = require("./util/gzipUtil").default;
+var _ = require("lodash");
+
+const app = new Koa();
 
 app.use(bodyParser());
 
@@ -83,7 +83,7 @@ app.use(
                 }
             }
         } else if (pathname === "/zip") {
-            console.log("queryObj:", queryObj);
+            // console.log("queryObj:", queryObj);
 
             const { path } = queryObj;
             if (path === undefined) {
@@ -91,6 +91,22 @@ app.use(
                 response.body = responseTemplate.fail;
             } else {
                 return zip(path, `${path}.zip`)
+                    .then((result) => {
+                        response.body = result;
+                    })
+                    .catch((error) => {
+                        response.body = error;
+                    });
+            }
+        } else if (pathname === "/unzip") {
+            // console.log("queryObj:", queryObj);
+
+            const { path } = queryObj;
+            if (path === undefined || _.endsWith(path, ".zip") === false) {
+                responseTemplate.fail.message = "缺少 path 参数";
+                response.body = responseTemplate.fail;
+            } else {
+                return unzip(path, `${path.slice(0, path.length - 4)}`)
                     .then((result) => {
                         response.body = result;
                     })
