@@ -8,6 +8,8 @@ const readDir = require("./util/readUtil").default;
 const deleteUtil = require("./util/deleteUtil").default;
 const { zip, unzip } = require("./util/gzipUtil").default;
 const { copyFile, copyDir } = require("./util/copyUtil").default;
+const KoaSend = require("koa-send");
+const Querystring = require("querystring");
 
 var _ = require("lodash");
 
@@ -141,6 +143,21 @@ app.use(
                             response.body = error;
                         });
                 }
+            }
+        } else if (pathname === "/download") {
+            // 从路径中解析参数
+            const { path, name } = Querystring.decode(url.query);
+
+            if (path === undefined) {
+                responseTemplate.fail.message = "缺少 path 参数";
+                response.body = responseTemplate.fail;
+            } else {
+                ctx.attachment(name);
+
+                const paths = path.split("/");
+                const root = paths.slice(0, paths.length - 1).join("/");
+
+                await KoaSend(ctx, name, { root: root });
             }
         }
     })
