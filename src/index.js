@@ -4,21 +4,15 @@ const mount = require("koa-mount");
 const URL = require("url");
 const responseTemplate = require("./util/responseTemplate");
 const cors = require("@koa/cors");
-const readDir = require("./util/readUtil").default;
-const deleteUtil = require("./util/deleteUtil").default;
-const { zip, unzip } = require("./util/gzipUtil").default;
-const { copyFile, copyDir } = require("./util/copyUtil").default;
+const readDir = require("./util/readUtil");
+const deleteUtil = require("./util/deleteUtil");
+const { zip, unzip } = require("./util/gzipUtil");
+const { copyFile, copyDir } = require("./util/copyUtil");
 const KoaSend = require("koa-send");
 const Querystring = require("querystring");
 const FS = require("fs");
 const { uploadFile } = require("./util/uploadUtil");
 const _ = require("lodash");
-const {
-    SuccessCode,
-    SuccessMessage,
-    FailCode,
-    FailMessage,
-} = require("./util/ResponseUtil").default;
 
 const app = new Koa();
 

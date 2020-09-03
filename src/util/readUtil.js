@@ -63,7 +63,7 @@ async function readDir(path) {
     return infos;
 }
 
-exports.default = {
+module.exports = {
     readDirAndFile,
     readDir,
 };

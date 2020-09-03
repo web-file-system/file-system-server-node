@@ -4,7 +4,7 @@ const {
     SuccessMessage,
     FailCode,
     FailMessage,
-} = require("./ResponseUtil").default;
+} = require("./ResponseUtil");
 const Compressing = require("compressing");
 
 function zip(input, output, isFile) {
@@ -94,7 +94,7 @@ function unzip(input, output) {
             });
     });
 }
-exports.default = {
+module.exports = {
     zip,
-    unzip: unzip,
+    unzip,
 };

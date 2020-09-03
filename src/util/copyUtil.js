@@ -4,8 +4,8 @@ const {
     SuccessMessage,
     FailCode,
     FailMessage,
-} = require("./ResponseUtil").default;
-const { zip } = require("./gzipUtil").default;
+} = require("./ResponseUtil");
+const { zip } = require("./gzipUtil");
 
 function copyFile(input) {
     return new Promise((resolve, reject) => {
@@ -80,7 +80,7 @@ function copyDir(input) {
             });
     });
 }
-exports.default = {
+module.exports = {
     copyFile,
     copyDir,
 };

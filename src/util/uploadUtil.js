@@ -5,7 +5,7 @@ const {
     SuccessMessage,
     FailCode,
     FailMessage,
-} = require("./ResponseUtil").default;
+} = require("./ResponseUtil");
 
 function uploadFile(ctx) {
     const request = ctx.request;

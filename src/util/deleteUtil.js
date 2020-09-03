@@ -4,7 +4,7 @@ const {
     SuccessMessage,
     FailCode,
     FailMessage,
-} = require("./ResponseUtil").default;
+} = require("./ResponseUtil");
 
 async function deleteFile(path) {
     return new Promise((resolve, reject) => {
@@ -72,4 +72,4 @@ async function deleteDir(path) {
             });
     });
 }
-exports.default = { deleteFile, deleteDir };
+module.exports = { deleteFile, deleteDir };
