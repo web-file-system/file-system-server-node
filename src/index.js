@@ -9,6 +9,7 @@ const deleteUtil = require("./util/deleteUtil");
 const { zip, unzip } = require("./util/gzipUtil");
 const { copyFile, copyDir } = require("./util/copyUtil");
 const { uploadFile, downloadFile } = require("./util/fileUtil");
+const { newDir } = require("./util/dirUtil");
 const _ = require("lodash");
 
 const app = new Koa();
@@ -30,7 +31,7 @@ app.use(
     })
 );
 app.use(
-    mount("/api", async (ctx) => {
+    mount("/api", async (ctx, next) => {
         const request = ctx.request;
         const response = ctx.response;
         // console.log("request:", request);
@@ -153,10 +154,10 @@ app.use(
             return downloadFile(ctx);
         } else if (pathname === "/upload") {
             uploadFile(ctx);
+        } else if (pathname === "/newDir") {
+            return newDir(ctx);
         }
     })
 );
 
 app.listen(80);
-
-console.log("__dirname:", __dirname);
