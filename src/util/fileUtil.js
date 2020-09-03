@@ -1,5 +1,7 @@
 const FS = require("fs");
-
+const URL = require("url");
+const Querystring = require("querystring");
+const KoaSend = require("koa-send");
 const {
     SuccessCode,
     SuccessMessage,
@@ -46,6 +48,28 @@ function uploadFile(ctx) {
     }
 }
 
+async function downloadFile(ctx) {
+    const request = ctx.request;
+    const response = ctx.response;
+    const url = URL.parse(request.url);
+
+    // 从路径中解析参数
+    const { path, name } = Querystring.decode(url.query);
+    console.log("downloadFile:", path);
+
+    if (path === undefined) {
+        responseTemplate.fail.message = "缺少 path 参数";
+        response.body = responseTemplate.fail;
+    } else {
+        ctx.attachment(name);
+
+        const paths = path.split("/");
+        const root = paths.slice(0, paths.length - 1).join("/");
+
+        return await KoaSend(ctx, name, { root: root });
+    }
+}
 module.exports = {
     uploadFile,
+    downloadFile,
 };

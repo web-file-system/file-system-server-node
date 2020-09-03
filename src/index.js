@@ -8,10 +8,7 @@ const readDir = require("./util/readUtil");
 const deleteUtil = require("./util/deleteUtil");
 const { zip, unzip } = require("./util/gzipUtil");
 const { copyFile, copyDir } = require("./util/copyUtil");
-const KoaSend = require("koa-send");
-const Querystring = require("querystring");
-const FS = require("fs");
-const { uploadFile } = require("./util/uploadUtil");
+const { uploadFile, downloadFile } = require("./util/fileUtil");
 const _ = require("lodash");
 
 const app = new Koa();
@@ -153,20 +150,7 @@ app.use(
                 }
             }
         } else if (pathname === "/download") {
-            // 从路径中解析参数
-            const { path, name } = Querystring.decode(url.query);
-
-            if (path === undefined) {
-                responseTemplate.fail.message = "缺少 path 参数";
-                response.body = responseTemplate.fail;
-            } else {
-                ctx.attachment(name);
-
-                const paths = path.split("/");
-                const root = paths.slice(0, paths.length - 1).join("/");
-
-                await KoaSend(ctx, name, { root: root });
-            }
+            return downloadFile(ctx);
         } else if (pathname === "/upload") {
             uploadFile(ctx);
         }
