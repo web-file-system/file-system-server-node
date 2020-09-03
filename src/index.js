@@ -1,8 +1,8 @@
 const Koa = require("koa");
+const KoaBody = require("koa-body");
 const mount = require("koa-mount");
 const URL = require("url");
 const responseTemplate = require("./util/responseTemplate");
-const bodyParser = require("koa-bodyparser");
 const cors = require("@koa/cors");
 const readDir = require("./util/readUtil").default;
 const deleteUtil = require("./util/deleteUtil").default;
@@ -10,12 +10,26 @@ const { zip, unzip } = require("./util/gzipUtil").default;
 const { copyFile, copyDir } = require("./util/copyUtil").default;
 const KoaSend = require("koa-send");
 const Querystring = require("querystring");
-
-var _ = require("lodash");
+const FS = require("fs");
+const { uploadFile } = require("./util/uploadUtil");
+const _ = require("lodash");
+const {
+    SuccessCode,
+    SuccessMessage,
+    FailCode,
+    FailMessage,
+} = require("./util/ResponseUtil").default;
 
 const app = new Koa();
 
-app.use(bodyParser());
+app.use(
+    KoaBody({
+        multipart: true,
+        formidable: {
+            maxFileSize: 200 * 1024 * 1024,
+        },
+    })
+);
 
 app.use(cors());
 
@@ -159,6 +173,8 @@ app.use(
 
                 await KoaSend(ctx, name, { root: root });
             }
+        } else if (pathname === "/upload") {
+            uploadFile(ctx);
         }
     })
 );
