@@ -10,8 +10,9 @@ const { zip, unzip } = require("./util/gzipUtil");
 const { copyFile, copyDir } = require("./util/copyUtil");
 const { uploadFile, downloadFile } = require("./util/fileUtil");
 const { newDir } = require("./util/dirUtil");
+const { renameFileOrDir } = require("./util/renameUtil");
 const _ = require("lodash");
-
+const FS = require("fs/promises");
 const app = new Koa();
 
 app.use(
@@ -156,8 +157,35 @@ app.use(
             uploadFile(ctx);
         } else if (pathname === "/newDir") {
             return newDir(ctx);
+        } else if (pathname === "/rename") {
+            return renameFileOrDir(ctx);
         }
     })
 );
 
 app.listen(80);
+
+// (function rename() {
+//     console.log("renmae", __dirname);
+//
+//     FS.rename(
+//         "/Users/zhangwenqi/WebFtpTest/123123",
+//         "/Users/zhangwenqi/WebFtpTest/123321"
+//     )
+//         .then(() => {
+//             console.log("chenggong");
+//         })
+//         .catch((error) => {
+//             console.log("error", error);
+//         });
+//     // FS.rename(
+//     //     "/Users/zhangwenqi/WebFtpTest/11.png",
+//     //     "/Users/zhangwenqi/WebFtpTest/12.png"
+//     // )
+//     //     .then(() => {
+//     //         console.log("chenggong");
+//     //     })
+//     //     .catch((error) => {
+//     //         console.log("error", error);
+//     //     });
+// })();

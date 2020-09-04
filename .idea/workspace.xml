@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ffcd21f4-cb9d-4b3a-b7bb-77d04c9fb89c" name="默认更改列表" comment="">
-      <change afterPath="$PROJECT_DIR$/.prettierrc.js" afterDir="false" />
+    <list default="true" id="ffcd21f4-cb9d-4b3a-b7bb-77d04c9fb89c" name="默认更改列表" comment="yarn add prettier -D">
       <change afterPath="$PROJECT_DIR$/src/util/renameUtil.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +50,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1599181708676</updated>
-      <workItem from="1599181710952" duration="1370000" />
+      <workItem from="1599181710952" duration="3149000" />
     </task>
     <task id="LOCAL-00001" summary="git 忽略idea配置文件">
       <created>1599181889576</created>
@@ -62,7 +59,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599181889576</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="yarn add prettier -D">
+      <created>1599183124483</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1599183124484</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -71,13 +75,14 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="git 忽略idea配置文件" />
-    <option name="LAST_COMMIT_MESSAGE" value="git 忽略idea配置文件" />
+    <MESSAGE value="yarn add prettier -D" />
+    <option name="LAST_COMMIT_MESSAGE" value="yarn add prettier -D" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="647" y="171" key="CommitChangelistDialog2" timestamp="1599181889253">
+    <state x="647" y="171" key="CommitChangelistDialog2" timestamp="1599183129185">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="647" y="171" key="CommitChangelistDialog2/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599181889253" />
+    <state x="647" y="171" key="CommitChangelistDialog2/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599183129185" />
     <state x="539" y="184" key="SettingsEditor" timestamp="1599182961445">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
