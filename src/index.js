@@ -6,7 +6,7 @@ const cors = require("@koa/cors");
 const _ = require("lodash");
 const { readDirAndFile } = require("./util/readUtil");
 const { deleteDirOrFile } = require("./util/deleteUtil");
-const { zip, unzip } = require("./util/gzipUtil");
+const { zip, unzip } = require("./util/zipUtil");
 const { copyFile, copyDir } = require("./util/copyUtil");
 const { uploadFile, downloadFile } = require("./util/fileUtil");
 const { newDir } = require("./util/dirUtil");
@@ -61,39 +61,27 @@ app.use(
         } else if (pathname === "/zip") {
             // console.log("queryObj:", queryObj);
 
-            const { path } = queryObj;
-            if (path === undefined) {
-                response.body = GetResponse({
-                    success: false,
-                    message: "缺少 path 参数",
+            const { path, type } = queryObj;
+            return zip({ input: path, type })
+                .then((result) => {
+                    response.body = result;
+                })
+                .catch((error) => {
+                    response.body = error;
                 });
-            } else {
-                return zip(path)
-                    .then((result) => {
-                        response.body = result;
-                    })
-                    .catch((error) => {
-                        response.body = error;
-                    });
-            }
         } else if (pathname === "/unzip") {
             // console.log("queryObj:", queryObj);
-
             const { path } = queryObj;
-            if (path === undefined || _.endsWith(path, ".zip") === false) {
-                response.body = GetResponse({
-                    success: false,
-                    message: "缺少 path 参数",
+            return unzip({
+                input: path,
+                output: `${path.slice(0, path.length - 4)}`,
+            })
+                .then((result) => {
+                    response.body = result;
+                })
+                .catch((error) => {
+                    response.body = error;
                 });
-            } else {
-                return unzip(path, `${path.slice(0, path.length - 4)}`)
-                    .then((result) => {
-                        response.body = result;
-                    })
-                    .catch((error) => {
-                        response.body = error;
-                    });
-            }
         } else if (pathname === "/copy") {
             const { path, type } = queryObj;
             if (path === undefined) {

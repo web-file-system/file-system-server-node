@@ -4,6 +4,8 @@ const SuccessMessage = "请求成功";
 const FailCode = 0;
 const FailMessage = "请求失败";
 
+const CanNotAccess = "不可访问";
+
 function GetResponse({ success, message, data }) {
     if (success === true) {
         return {
@@ -24,5 +26,6 @@ module.exports = {
     SuccessMessage,
     FailCode,
     FailMessage,
+    CanNotAccess,
     GetResponse,
 };

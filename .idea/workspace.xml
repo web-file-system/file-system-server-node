@@ -4,7 +4,9 @@
     <list default="true" id="ffcd21f4-cb9d-4b3a-b7bb-77d04c9fb89c" name="默认更改列表" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/deleteUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/deleteUtil.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/ResponseUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/ResponseUtil.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/copyUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/copyUtil.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/gzipUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/zipUtil.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +39,7 @@
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="run.prettier.on.save" value="true" />
     <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -72,7 +75,7 @@
       <option name="presentableId" value="Default" />
       <updated>1599181708676</updated>
       <workItem from="1599181710952" duration="5169000" />
-      <workItem from="1599444238345" duration="2690000" />
+      <workItem from="1599444238345" duration="5449000" />
     </task>
     <task id="LOCAL-00001" summary="git 忽略idea配置文件">
       <created>1599181889576</created>
@@ -102,7 +105,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599445797992</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="重构 deleteDirOrFile 方法">
+      <created>1599447047630</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1599447047630</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -114,17 +124,18 @@
     <MESSAGE value="yarn add prettier -D" />
     <MESSAGE value="添加重命名接口" />
     <MESSAGE value="重构readDirAndFile方法" />
-    <option name="LAST_COMMIT_MESSAGE" value="重构readDirAndFile方法" />
+    <MESSAGE value="重构 deleteDirOrFile 方法" />
+    <option name="LAST_COMMIT_MESSAGE" value="重构 deleteDirOrFile 方法" />
   </component>
   <component name="WindowStateProjectService">
     <state x="889" y="473" key="#Notifications" timestamp="1599445412864">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="889" y="473" key="#Notifications/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599445412864" />
-    <state x="647" y="171" key="CommitChangelistDialog2" timestamp="1599445797638">
+    <state x="647" y="171" key="CommitChangelistDialog2" timestamp="1599447047502">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="647" y="171" key="CommitChangelistDialog2/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599445797638" />
+    <state x="647" y="171" key="CommitChangelistDialog2/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599447047502" />
     <state width="1134" height="398" key="GridCell.Tab.0.bottom" timestamp="1599444328044">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
@@ -149,5 +160,9 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="680" y="335" key="Vcs.Push.Dialog.v2/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599204826798" />
+    <state x="856" y="360" width="848" height="720" key="find.popup" timestamp="1599447856461">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="856" y="360" width="848" height="720" key="find.popup/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599447856461" />
   </component>
 </project>

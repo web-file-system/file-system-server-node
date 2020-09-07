@@ -5,7 +5,7 @@ const {
     FailCode,
     FailMessage,
 } = require("./ResponseUtil");
-const { zip } = require("./gzipUtil");
+const { zip } = require("./zipUtil");
 
 function copyFile(input) {
     return new Promise((resolve, reject) => {
@@ -54,7 +54,7 @@ function copyDir(input) {
             .then(() => {
                 // 可访问
                 let output = `${input}的备份.zip`;
-                zip(input, output)
+                zip({ input, output })
                     .then(() => {
                         const res = {
                             code: SuccessCode,
