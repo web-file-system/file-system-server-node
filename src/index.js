@@ -5,7 +5,7 @@ const URL = require("url");
 const cors = require("@koa/cors");
 const _ = require("lodash");
 const { readDirAndFile } = require("./util/readUtil");
-const { deleteDir, deleteFile } = require("./util/deleteUtil");
+const { deleteDirOrFile } = require("./util/deleteUtil");
 const { zip, unzip } = require("./util/gzipUtil");
 const { copyFile, copyDir } = require("./util/copyUtil");
 const { uploadFile, downloadFile } = require("./util/fileUtil");
@@ -51,33 +51,13 @@ app.use(
                     response.body = error;
                 });
         } else if (pathname === "/delete") {
-            const { path, type } = queryObj;
-            if (path === undefined) {
-                response.body = GetResponse({
-                    success: false,
-                    message: "缺少 path 参数",
+            return deleteDirOrFile(queryObj)
+                .then((result) => {
+                    response.body = result;
+                })
+                .catch((error) => {
+                    response.body = error;
                 });
-            } else {
-                if (type === "file") {
-                    //file
-                    return deleteFile(path)
-                        .then((result) => {
-                            response.body = result;
-                        })
-                        .catch((error) => {
-                            response.body = error;
-                        });
-                } else {
-                    //dir
-                    return deleteDir(path)
-                        .then((result) => {
-                            response.body = result;
-                        })
-                        .catch((error) => {
-                            response.body = error;
-                        });
-                }
-            }
         } else if (pathname === "/zip") {
             // console.log("queryObj:", queryObj);
 

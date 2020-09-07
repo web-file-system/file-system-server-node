@@ -4,7 +4,7 @@
     <list default="true" id="ffcd21f4-cb9d-4b3a-b7bb-77d04c9fb89c" name="默认更改列表" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/readUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/readUtil.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/deleteUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/deleteUtil.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +24,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.7.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="" />
@@ -70,7 +72,7 @@
       <option name="presentableId" value="Default" />
       <updated>1599181708676</updated>
       <workItem from="1599181710952" duration="5169000" />
-      <workItem from="1599444238345" duration="1400000" />
+      <workItem from="1599444238345" duration="2690000" />
     </task>
     <task id="LOCAL-00001" summary="git 忽略idea配置文件">
       <created>1599181889576</created>
@@ -93,7 +95,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599184932253</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="重构readDirAndFile方法">
+      <created>1599445797992</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1599445797992</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -104,17 +113,18 @@
     <MESSAGE value="git 忽略idea配置文件" />
     <MESSAGE value="yarn add prettier -D" />
     <MESSAGE value="添加重命名接口" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加重命名接口" />
+    <MESSAGE value="重构readDirAndFile方法" />
+    <option name="LAST_COMMIT_MESSAGE" value="重构readDirAndFile方法" />
   </component>
   <component name="WindowStateProjectService">
     <state x="889" y="473" key="#Notifications" timestamp="1599445412864">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="889" y="473" key="#Notifications/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599445412864" />
-    <state x="647" y="171" key="CommitChangelistDialog2" timestamp="1599184932144">
+    <state x="647" y="171" key="CommitChangelistDialog2" timestamp="1599445797638">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="647" y="171" key="CommitChangelistDialog2/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599184932144" />
+    <state x="647" y="171" key="CommitChangelistDialog2/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599445797638" />
     <state width="1134" height="398" key="GridCell.Tab.0.bottom" timestamp="1599444328044">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
