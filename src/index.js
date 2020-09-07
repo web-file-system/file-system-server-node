@@ -3,15 +3,13 @@ const KoaBody = require("koa-body");
 const mount = require("koa-mount");
 const URL = require("url");
 const cors = require("@koa/cors");
-const _ = require("lodash");
 const { readDirAndFile } = require("./util/readUtil");
 const { deleteDirOrFile } = require("./util/deleteUtil");
 const { zip, unzip } = require("./util/zipUtil");
-const { copyFile, copyDir } = require("./util/copyUtil");
+const { copyDirOrFile } = require("./util/copyUtil");
 const { uploadFile, downloadFile } = require("./util/fileUtil");
 const { newDir } = require("./util/dirUtil");
 const { renameFileOrDir } = require("./util/renameUtil");
-const { GetResponse } = require("./util/ResponseUtil");
 
 const app = new Koa();
 
@@ -32,7 +30,7 @@ app.use(
     })
 );
 app.use(
-    mount("/api", async (ctx, next) => {
+    mount("/api", async (ctx) => {
         const request = ctx.request;
         const response = ctx.response;
         const url = URL.parse(request.url);
@@ -84,32 +82,13 @@ app.use(
                 });
         } else if (pathname === "/copy") {
             const { path, type } = queryObj;
-            if (path === undefined) {
-                response.body = GetResponse({
-                    success: false,
-                    message: "缺少 path 参数",
+            return copyDirOrFile({ path, type })
+                .then((result) => {
+                    response.body = result;
+                })
+                .catch((error) => {
+                    response.body = error;
                 });
-            } else {
-                if (type === "file") {
-                    //file
-                    return copyFile(path)
-                        .then((result) => {
-                            response.body = result;
-                        })
-                        .catch((error) => {
-                            response.body = error;
-                        });
-                } else {
-                    //dir
-                    return copyDir(path)
-                        .then((result) => {
-                            response.body = result;
-                        })
-                        .catch((error) => {
-                            response.body = error;
-                        });
-                }
-            }
         } else if (pathname === "/download") {
             return downloadFile(ctx);
         } else if (pathname === "/upload") {

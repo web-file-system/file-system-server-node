@@ -4,6 +4,7 @@ const {
     SuccessMessage,
     FailCode,
     FailMessage,
+    GetResponse,
 } = require("./ResponseUtil");
 const { zip } = require("./zipUtil");
 
@@ -80,7 +81,41 @@ function copyDir(input) {
             });
     });
 }
+
+function copyDirOrFile({ path, type }) {
+    return new Promise((resolve, reject) => {
+        if (path === undefined) {
+            reject(
+                GetResponse({
+                    success: false,
+                    message: "缺少 path 参数",
+                })
+            );
+        } else {
+            if (type === "file") {
+                //file
+                copyFile(path)
+                    .then((result) => {
+                        resolve(result);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            } else {
+                //dir
+                copyDir(path)
+                    .then((result) => {
+                        resolve(result);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            }
+        }
+    });
+}
 module.exports = {
     copyFile,
     copyDir,
+    copyDirOrFile,
 };

@@ -4,9 +4,7 @@
     <list default="true" id="ffcd21f4-cb9d-4b3a-b7bb-77d04c9fb89c" name="默认更改列表" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/ResponseUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/ResponseUtil.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/copyUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/copyUtil.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/gzipUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/zipUtil.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +73,7 @@
       <option name="presentableId" value="Default" />
       <updated>1599181708676</updated>
       <workItem from="1599181710952" duration="5169000" />
-      <workItem from="1599444238345" duration="5449000" />
+      <workItem from="1599444238345" duration="6279000" />
     </task>
     <task id="LOCAL-00001" summary="git 忽略idea配置文件">
       <created>1599181889576</created>
@@ -112,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599447047630</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="重构 zip、unzip 方法">
+      <created>1599459581229</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1599459581229</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,17 +130,18 @@
     <MESSAGE value="添加重命名接口" />
     <MESSAGE value="重构readDirAndFile方法" />
     <MESSAGE value="重构 deleteDirOrFile 方法" />
-    <option name="LAST_COMMIT_MESSAGE" value="重构 deleteDirOrFile 方法" />
+    <MESSAGE value="重构 zip、unzip 方法" />
+    <option name="LAST_COMMIT_MESSAGE" value="重构 zip、unzip 方法" />
   </component>
   <component name="WindowStateProjectService">
     <state x="889" y="473" key="#Notifications" timestamp="1599445412864">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="889" y="473" key="#Notifications/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599445412864" />
-    <state x="647" y="171" key="CommitChangelistDialog2" timestamp="1599447047502">
+    <state x="647" y="171" key="CommitChangelistDialog2" timestamp="1599459581107">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="647" y="171" key="CommitChangelistDialog2/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599447047502" />
+    <state x="647" y="171" key="CommitChangelistDialog2/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599459581107" />
     <state width="1134" height="398" key="GridCell.Tab.0.bottom" timestamp="1599444328044">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
