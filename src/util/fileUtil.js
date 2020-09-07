@@ -7,6 +7,7 @@ const {
     SuccessMessage,
     FailCode,
     FailMessage,
+    GetResponse,
 } = require("./ResponseUtil");
 
 function uploadFile(ctx) {
@@ -18,11 +19,15 @@ function uploadFile(ctx) {
     const file = request.files.file;
 
     if (path === undefined) {
-        responseTemplate.fail.message = "缺少 path 参数";
-        response.body = responseTemplate.fail;
+        response.body = GetResponse({
+            success: false,
+            message: "缺少 path 参数",
+        });
     } else if (file === undefined) {
-        responseTemplate.fail.message = "缺少 file 数据";
-        response.body = responseTemplate.fail;
+        response.body = GetResponse({
+            success: false,
+            message: "缺少 file 参数",
+        });
     } else {
         try {
             //创建写入流
@@ -58,8 +63,10 @@ async function downloadFile(ctx) {
     console.log("downloadFile:", path);
 
     if (path === undefined) {
-        responseTemplate.fail.message = "缺少 path 参数";
-        response.body = responseTemplate.fail;
+        response.body = GetResponse({
+            success: false,
+            message: "缺少 path 参数",
+        });
     } else {
         ctx.attachment(name);
 

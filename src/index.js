@@ -12,6 +12,7 @@ const { copyFile, copyDir } = require("./util/copyUtil");
 const { uploadFile, downloadFile } = require("./util/fileUtil");
 const { newDir } = require("./util/dirUtil");
 const { renameFileOrDir } = require("./util/renameUtil");
+const { GetResponse } = require("./util/ResponseUtil");
 
 const app = new Koa();
 
@@ -47,29 +48,21 @@ app.use(
         if (pathname === "/list") {
             const { path } = queryObj;
             if (path === undefined) {
-                responseTemplate.fail.message = "缺少 path 参数";
-                response.body = responseTemplate.fail;
+                response.body = GetResponse({
+                    success: false,
+                    message: "缺少 path 参数",
+                });
             } else {
                 const files = await readDirAndFile(path);
-                // console.log("files2", files);
-                responseTemplate.success.data = files;
-                response.body = responseTemplate.success;
-            }
-        } else if (pathname === "/root") {
-            const { path } = queryObj;
-            if (path === undefined) {
-                responseTemplate.fail.message = "缺少 path 参数";
-                response.body = responseTemplate.fail;
-            } else {
-                const files = await readDir(path);
-                responseTemplate.success.data = files;
-                response.body = responseTemplate.success;
+                response.body = GetResponse({ success: true, data: files });
             }
         } else if (pathname === "/delete") {
             const { path, type } = queryObj;
             if (path === undefined) {
-                responseTemplate.fail.message = "缺少 path 参数";
-                response.body = responseTemplate.fail;
+                response.body = GetResponse({
+                    success: false,
+                    message: "缺少 path 参数",
+                });
             } else {
                 if (type === "file") {
                     //file
@@ -96,8 +89,10 @@ app.use(
 
             const { path } = queryObj;
             if (path === undefined) {
-                responseTemplate.fail.message = "缺少 path 参数";
-                response.body = responseTemplate.fail;
+                response.body = GetResponse({
+                    success: false,
+                    message: "缺少 path 参数",
+                });
             } else {
                 return zip(path)
                     .then((result) => {
@@ -112,8 +107,10 @@ app.use(
 
             const { path } = queryObj;
             if (path === undefined || _.endsWith(path, ".zip") === false) {
-                responseTemplate.fail.message = "缺少 path 参数";
-                response.body = responseTemplate.fail;
+                response.body = GetResponse({
+                    success: false,
+                    message: "缺少 path 参数",
+                });
             } else {
                 return unzip(path, `${path.slice(0, path.length - 4)}`)
                     .then((result) => {
@@ -126,8 +123,10 @@ app.use(
         } else if (pathname === "/copy") {
             const { path, type } = queryObj;
             if (path === undefined) {
-                responseTemplate.fail.message = "缺少 path 参数";
-                response.body = responseTemplate.fail;
+                response.body = GetResponse({
+                    success: false,
+                    message: "缺少 path 参数",
+                });
             } else {
                 if (type === "file") {
                     //file
