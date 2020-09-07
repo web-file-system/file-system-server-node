@@ -4,7 +4,6 @@ const mount = require("koa-mount");
 const URL = require("url");
 const cors = require("@koa/cors");
 const _ = require("lodash");
-const responseTemplate = require("./util/responseTemplate");
 const { readDirAndFile } = require("./util/readUtil");
 const { deleteDir, deleteFile } = require("./util/deleteUtil");
 const { zip, unzip } = require("./util/gzipUtil");
@@ -36,9 +35,6 @@ app.use(
     mount("/api", async (ctx, next) => {
         const request = ctx.request;
         const response = ctx.response;
-        // console.log("request:", request);
-        // console.log("request-body:", request.body);
-
         const url = URL.parse(request.url);
         const pathname = url.pathname;
 
@@ -47,15 +43,13 @@ app.use(
 
         if (pathname === "/list") {
             const { path } = queryObj;
-            if (path === undefined) {
-                response.body = GetResponse({
-                    success: false,
-                    message: "缺少 path 参数",
+            return readDirAndFile(path)
+                .then((result) => {
+                    response.body = result;
+                })
+                .catch((error) => {
+                    response.body = error;
                 });
-            } else {
-                const files = await readDirAndFile(path);
-                response.body = GetResponse({ success: true, data: files });
-            }
         } else if (pathname === "/delete") {
             const { path, type } = queryObj;
             if (path === undefined) {
