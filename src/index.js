@@ -2,17 +2,17 @@ const Koa = require("koa");
 const KoaBody = require("koa-body");
 const mount = require("koa-mount");
 const URL = require("url");
-const responseTemplate = require("./util/responseTemplate");
 const cors = require("@koa/cors");
-const readDir = require("./util/readUtil");
-const deleteUtil = require("./util/deleteUtil");
+const _ = require("lodash");
+const responseTemplate = require("./util/responseTemplate");
+const { readDirAndFile } = require("./util/readUtil");
+const { deleteDir, deleteFile } = require("./util/deleteUtil");
 const { zip, unzip } = require("./util/gzipUtil");
 const { copyFile, copyDir } = require("./util/copyUtil");
 const { uploadFile, downloadFile } = require("./util/fileUtil");
 const { newDir } = require("./util/dirUtil");
 const { renameFileOrDir } = require("./util/renameUtil");
-const _ = require("lodash");
-const FS = require("fs/promises");
+
 const app = new Koa();
 
 app.use(
@@ -50,7 +50,7 @@ app.use(
                 responseTemplate.fail.message = "缺少 path 参数";
                 response.body = responseTemplate.fail;
             } else {
-                const files = await readDir.readDirAndFile(path);
+                const files = await readDirAndFile(path);
                 // console.log("files2", files);
                 responseTemplate.success.data = files;
                 response.body = responseTemplate.success;
@@ -61,7 +61,7 @@ app.use(
                 responseTemplate.fail.message = "缺少 path 参数";
                 response.body = responseTemplate.fail;
             } else {
-                const files = await readDir.readDir(path);
+                const files = await readDir(path);
                 responseTemplate.success.data = files;
                 response.body = responseTemplate.success;
             }
@@ -73,8 +73,7 @@ app.use(
             } else {
                 if (type === "file") {
                     //file
-                    return deleteUtil
-                        .deleteFile(path)
+                    return deleteFile(path)
                         .then((result) => {
                             response.body = result;
                         })
@@ -83,8 +82,7 @@ app.use(
                         });
                 } else {
                     //dir
-                    return deleteUtil
-                        .deleteDir(path)
+                    return deleteDir(path)
                         .then((result) => {
                             response.body = result;
                         })
@@ -164,28 +162,3 @@ app.use(
 );
 
 app.listen(80);
-
-// (function rename() {
-//     console.log("renmae", __dirname);
-//
-//     FS.rename(
-//         "/Users/zhangwenqi/WebFtpTest/123123",
-//         "/Users/zhangwenqi/WebFtpTest/123321"
-//     )
-//         .then(() => {
-//             console.log("chenggong");
-//         })
-//         .catch((error) => {
-//             console.log("error", error);
-//         });
-//     // FS.rename(
-//     //     "/Users/zhangwenqi/WebFtpTest/11.png",
-//     //     "/Users/zhangwenqi/WebFtpTest/12.png"
-//     // )
-//     //     .then(() => {
-//     //         console.log("chenggong");
-//     //     })
-//     //     .catch((error) => {
-//     //         console.log("error", error);
-//     //     });
-// })();

@@ -16,7 +16,7 @@ async function readFileInfo(path, dirent) {
     info.isDir = dirent.isDirectory();
     info.name = dirent.name;
     info.path = Path.posix.join(path, dirent.name);
-    info.isZip = Path.posix.extname(info.path) === ".zip" ? true : false;
+    info.isZip = Path.posix.extname(info.path) === ".zip";
     // console.log("info:", info);
 
     const stat = await fs.promises.stat(info.path);
@@ -46,24 +46,6 @@ async function readDirAndFile(path) {
     return infos;
 }
 
-async function readDir(path) {
-    if (path === undefined || path === null) {
-        path = "/";
-    }
-    const files = await fs.promises.readdir(path, { withFileTypes: true });
-    // console.log("files:", files);
-    const infos = [];
-    for (const dirent of files) {
-        if (dirent.isDirectory()) {
-            // 只显示文件夹
-            const info = await readFileInfo(path, dirent);
-            infos.push(info);
-        }
-    }
-    return infos;
-}
-
 module.exports = {
     readDirAndFile,
-    readDir,
 };
