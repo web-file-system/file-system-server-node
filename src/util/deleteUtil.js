@@ -1,43 +1,36 @@
 const FS = require("fs/promises");
-const {
-    SuccessCode,
-    SuccessMessage,
-    FailCode,
-    FailMessage,
-    GetResponse,
-} = require("./ResponseUtil");
+const { GetResponse, CanNotAccess } = require("./ResponseUtil");
 
 async function deleteFile(path) {
     return new Promise((resolve, reject) => {
         FS.access(path)
             .then(() => {
                 // 可访问
-
                 FS.unlink(path)
                     .then(() => {
-                        const res = {
-                            code: SuccessCode,
-                            message: SuccessMessage,
-                        };
-                        resolve(res);
+                        resolve(
+                            GetResponse({
+                                success: true,
+                            })
+                        );
                     })
-                    .catch(() => {
-                        const error = {
-                            code: FailCode,
-                            message: FailMessage,
-                        };
-                        reject(error);
+                    .catch((error) => {
+                        reject(
+                            GetResponse({
+                                success: false,
+                                message: error.code,
+                            })
+                        );
                     });
             })
-            .catch(() => {
+            .catch((error) => {
                 // 不可访问
-
-                const error = {
-                    code: FailCode,
-                    message: FailMessage,
-                };
-
-                reject(error);
+                reject(
+                    GetResponse({
+                        success: false,
+                        message: error.code,
+                    })
+                );
             });
     });
 }
@@ -47,29 +40,31 @@ async function deleteDir(path) {
         FS.access(path)
             .then(() => {
                 // 可访问
-                FS.rmdir(path)
+                FS.rmdir(path, { recursive: true })
                     .then(() => {
-                        const res = {
-                            code: SuccessCode,
-                            message: SuccessMessage,
-                        };
-                        resolve(res);
+                        resolve(
+                            GetResponse({
+                                success: true,
+                            })
+                        );
                     })
-                    .catch(() => {
-                        const error = {
-                            code: FailCode,
-                            message: FailMessage,
-                        };
-                        reject(error);
+                    .catch((error) => {
+                        reject(
+                            GetResponse({
+                                success: false,
+                                message: error.code,
+                            })
+                        );
                     });
             })
             .catch(() => {
                 // 不可访问
-                const error = {
-                    code: FailCode,
-                    message: FailMessage,
-                };
-                reject(error);
+                reject(
+                    GetResponse({
+                        success: false,
+                        message: CanNotAccess,
+                    })
+                );
             });
     });
 }

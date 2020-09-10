@@ -1,6 +1,5 @@
 const FS = require("fs");
 const { CanNotAccess, GetResponse } = require("./ResponseUtil");
-const Compressing = require("compressing");
 const AdmZip = require("adm-zip");
 const _ = require("lodash");
 const Path = require("path");
