@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ffcd21f4-cb9d-4b3a-b7bb-77d04c9fb89c" name="默认更改列表" comment="">
+      <change afterPath="$PROJECT_DIR$/background的副本24.js.zip/background的副本24.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/copyUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/copyUtil.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/zipUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/zipUtil.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,15 +31,16 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.7.0" />
-    <property name="javascript.nodejs.core.library.typings.version" value="" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.6.4" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/util" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="run.prettier.on.save" value="true" />
-    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -73,7 +76,9 @@
       <option name="presentableId" value="Default" />
       <updated>1599181708676</updated>
       <workItem from="1599181710952" duration="5169000" />
-      <workItem from="1599444238345" duration="6279000" />
+      <workItem from="1599444238345" duration="6715000" />
+      <workItem from="1599720137831" duration="246000" />
+      <workItem from="1599720485911" duration="1818000" />
     </task>
     <task id="LOCAL-00001" summary="git 忽略idea配置文件">
       <created>1599181889576</created>
@@ -117,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599459581229</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="重构 copyDirOrFile 方法">
+      <created>1599460284174</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1599460284174</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -131,41 +143,42 @@
     <MESSAGE value="重构readDirAndFile方法" />
     <MESSAGE value="重构 deleteDirOrFile 方法" />
     <MESSAGE value="重构 zip、unzip 方法" />
-    <option name="LAST_COMMIT_MESSAGE" value="重构 zip、unzip 方法" />
+    <MESSAGE value="重构 copyDirOrFile 方法" />
+    <option name="LAST_COMMIT_MESSAGE" value="重构 copyDirOrFile 方法" />
   </component>
   <component name="WindowStateProjectService">
     <state x="889" y="473" key="#Notifications" timestamp="1599445412864">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="889" y="473" key="#Notifications/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599445412864" />
-    <state x="647" y="171" key="CommitChangelistDialog2" timestamp="1599459581107">
+    <state x="647" y="171" key="CommitChangelistDialog2" timestamp="1599460284069">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="647" y="171" key="CommitChangelistDialog2/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599459581107" />
-    <state width="1134" height="398" key="GridCell.Tab.0.bottom" timestamp="1599444328044">
+    <state x="647" y="171" key="CommitChangelistDialog2/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599460284069" />
+    <state width="1134" height="398" key="GridCell.Tab.0.bottom" timestamp="1599471733544">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="1134" height="398" key="GridCell.Tab.0.bottom/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599444328044" />
-    <state width="1134" height="398" key="GridCell.Tab.0.center" timestamp="1599444328042">
+    <state width="1134" height="398" key="GridCell.Tab.0.bottom/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599471733544" />
+    <state width="1134" height="398" key="GridCell.Tab.0.center" timestamp="1599471733537">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="1134" height="398" key="GridCell.Tab.0.center/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599444328042" />
-    <state width="1134" height="398" key="GridCell.Tab.0.left" timestamp="1599444328040">
+    <state width="1134" height="398" key="GridCell.Tab.0.center/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599471733537" />
+    <state width="1134" height="398" key="GridCell.Tab.0.left" timestamp="1599471733533">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="1134" height="398" key="GridCell.Tab.0.left/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599444328040" />
-    <state width="1134" height="398" key="GridCell.Tab.0.right" timestamp="1599444328043">
+    <state width="1134" height="398" key="GridCell.Tab.0.left/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599471733533" />
+    <state width="1134" height="398" key="GridCell.Tab.0.right" timestamp="1599471733541">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="1134" height="398" key="GridCell.Tab.0.right/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599444328043" />
-    <state x="539" y="184" key="SettingsEditor" timestamp="1599182961445">
+    <state width="1134" height="398" key="GridCell.Tab.0.right/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599471733541" />
+    <state x="539" y="184" key="SettingsEditor" timestamp="1599460525884">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="539" y="184" key="SettingsEditor/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599182961445" />
-    <state x="680" y="335" key="Vcs.Push.Dialog.v2" timestamp="1599204826798">
+    <state x="539" y="184" key="SettingsEditor/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599460525884" />
+    <state x="680" y="335" key="Vcs.Push.Dialog.v2" timestamp="1599460337360">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="680" y="335" key="Vcs.Push.Dialog.v2/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599204826798" />
+    <state x="680" y="335" key="Vcs.Push.Dialog.v2/2560.540.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1599460337360" />
     <state x="856" y="360" width="848" height="720" key="find.popup" timestamp="1599447856461">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>

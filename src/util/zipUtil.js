@@ -1,7 +1,11 @@
 const FS = require("fs");
 const { CanNotAccess, GetResponse } = require("./ResponseUtil");
 const Compressing = require("compressing");
+const AdmZip = require("adm-zip");
 const _ = require("lodash");
+const Path = require("path");
+
+const Zip = new AdmZip();
 
 function zip({ input, output, type }) {
     return new Promise((resolve, reject) => {
@@ -21,36 +25,35 @@ function zip({ input, output, type }) {
                         output = `${input}.zip`;
                     }
                     if (type === "file") {
-                        Compressing.zip
-                            .compressFile(input, output)
-                            .then(() => {
-                                const res = GetResponse({
-                                    success: true,
-                                });
-                                resolve(res);
-                            })
-                            .catch((err) => {
-                                console.log(err);
+                        Zip.addLocalFile(input);
+                        Zip.writeZip(output, (error) => {
+                            if (error) {
                                 const error = GetResponse({
                                     success: false,
                                 });
                                 reject(error);
-                            });
+                            } else {
+                                const res = GetResponse({
+                                    success: true,
+                                });
+                                resolve(res);
+                            }
+                        });
                     } else {
-                        Compressing.zip
-                            .compressDir(input, output)
-                            .then(() => {
-                                const res = GetResponse({
-                                    success: true,
-                                });
-                                resolve(res);
-                            })
-                            .catch(() => {
+                        Zip.addLocalFolder(input);
+                        Zip.writeZip(output, (error) => {
+                            if (error) {
                                 const error = GetResponse({
                                     success: false,
                                 });
                                 reject(error);
-                            });
+                            } else {
+                                const res = GetResponse({
+                                    success: true,
+                                });
+                                resolve(res);
+                            }
+                        });
                     }
                 })
                 .catch(() => {
@@ -87,23 +90,30 @@ function unzip({ input, output }) {
                 .access(input)
                 .then(() => {
                     // 可访问
-                    Compressing.zip
-                        .uncompress(input, output)
-                        .then(() => {
-                            resolve(
-                                GetResponse({
-                                    success: true,
-                                })
-                            );
-                        })
-                        .catch((err) => {
-                            reject(
-                                GetResponse({
-                                    success: false,
-                                    message: CanNotAccess,
-                                })
-                            );
-                        });
+                    try {
+                        const zip = new AdmZip(input);
+                        const zipEntries = zip.getEntries();
+                        console.log(zipEntries);
+                        if (zipEntries.length > 1) {
+                            zip.extractAllTo(output, true);
+                        } else {
+                            const name = Path.dirname(input);
+                            console.log(name);
+                            zip.extractAllTo(name, true);
+                        }
+                        resolve(
+                            GetResponse({
+                                success: true,
+                            })
+                        );
+                    } catch (e) {
+                        console.log(e);
+                        reject(
+                            GetResponse({
+                                success: false,
+                            })
+                        );
+                    }
                 })
                 .catch(() => {
                     // 不可访问
